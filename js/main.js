@@ -87,3 +87,21 @@ document.querySelectorAll('.project-thumb img[data-link]').forEach(img => {
     window.open(this.dataset.link, '_blank');
   });
 });
+
+// ===========================
+// CV DOWNLOAD HANDLER
+// ===========================
+function handleCV(e) {
+  const link = e.currentTarget;
+  // Cek apakah file bisa diakses
+  fetch(link.href)
+    .then(res => {
+      if (!res.ok) {
+        e.preventDefault();
+        alert('File CV tidak ditemukan. Pastikan file CV.pdf ada di folder assets/');
+      }
+    })
+    .catch(() => {
+      // Kalau fetch gagal (misal buka dari file://), biarkan download berjalan normal
+    });
+}
